@@ -4,10 +4,12 @@ with open('directions.txt') as f:
   directions = f.readlines()
 
 head = (0,0)
-tail = (0,0)
+tail = []
+for i in range(0, 9):
+  tail.append((0,0))
 tailVisited = []
 
-def trail_tail(head, tail, trail):
+def follow_trail(head, tail):
   tail = list(tail)
   if abs(tail[0]-head[0]) > 1 or abs(tail[1]-head[1]) > 1:
     # rope in same row
@@ -20,8 +22,8 @@ def trail_tail(head, tail, trail):
     else: #neither
       tail[0] += np.sign(head[0]-tail[0])
       tail[1] += np.sign(head[1]-tail[1])
-    trail.append(tuple(tail[:]))
-  return [tail, trail]
+  tail = tuple(tail)
+  return tail
 
 def move_head(direction, steps, head, tail, trail):
   for step in range(0, int(steps)):
@@ -33,7 +35,10 @@ def move_head(direction, steps, head, tail, trail):
       head = [head[0]-1, head[1]]
     if direction == 'R':
       head = [head[0], head[1]+1]
-    [tail, trail] = trail_tail(head, tail, trail)
+    tail[0] = follow_trail(head, tail[0])
+    for position in range(0, len(tail)-1):
+      tail[position+1] = follow_trail(tail[position], tail[position+1])
+    trail.append(tail[-1])
   return [head, tail, trail]
 
 trail = [(0,0)]
