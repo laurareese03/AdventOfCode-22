@@ -17,9 +17,9 @@ for line in lines:
       crtRows.append(crtRow)
       crtRow = ''
     if (count == len(crtRow) or count+1 == len(crtRow) or count-1 == len(crtRow)):
-      crtRow += '#'
+      crtRow += '🎁'
     else:
-      crtRow += '.'
+      crtRow += '🎄'
     cycle += 1
   
   else:
@@ -28,18 +28,18 @@ for line in lines:
       crtRows.append(crtRow)
       crtRow = ''
     if (count == len(crtRow) or count+1 == len(crtRow) or count-1 == len(crtRow)):
-      crtRow += '#'
+      crtRow += '🎁'
     else:
-      crtRow += '.'
+      crtRow += '🎄'
     cycle += 1
     if ((cycle-1) % 40 == 0):
       crtRows.append(crtRow)
       crtRow = ''
 
     if (count == len(crtRow) or count+1 == len(crtRow) or count-1 == len(crtRow)):
-      crtRow += '#'
+      crtRow += '🎁'
     else:
-      crtRow += '.'
+      crtRow += '🎄'
     cycle += 1
     count += int(line[1])
 
