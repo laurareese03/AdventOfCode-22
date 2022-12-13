@@ -1,4 +1,4 @@
-import numpy as np # for ONE function :(
+from numpy import sign # for ONE function :(
 
 with open('directions.txt') as f:
   directions = f.readlines()
@@ -12,16 +12,15 @@ tailVisited = []
 def follow_trail(head, tail):
   tail = list(tail)
   if abs(tail[0]-head[0]) > 1 or abs(tail[1]-head[1]) > 1:
-    # rope in same row
     if tail[0] == head[0]: #same row
-      tail[1] += np.sign(head[1]-tail[1])
+      tail[1] += sign(head[1]-tail[1])
 
     elif tail[1] == head[1]: #same column
-      tail[0] += np.sign(head[0]-tail[0])
+      tail[0] += sign(head[0]-tail[0])
 
     else: #neither
-      tail[0] += np.sign(head[0]-tail[0])
-      tail[1] += np.sign(head[1]-tail[1])
+      tail[0] += sign(head[0]-tail[0])
+      tail[1] += sign(head[1]-tail[1])
   tail = tuple(tail)
   return tail
 
