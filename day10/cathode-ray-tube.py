@@ -43,8 +43,6 @@ for line in lines:
     cycle += 1
     count += int(line[1])
 
-  print(crtRow)
-
 crtRows.append(crtRow)
 
 for row in crtRows:
