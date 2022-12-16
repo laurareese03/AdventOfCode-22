@@ -34,20 +34,22 @@ for i in range(0, len(lines)):
     width = [min(width[0], int(point[0])), max(width[1], int(point[0]))]
     height = [min(height[0], int(point[1])), max(height[1], int(point[1]))]
 
-grid = np.full((height[1]+1, width[1]-width[0]+1), '.')
+grid = np.full((height[1]+1+2, width[1]), '.')
+widthMod = width[1]//2
 for line in lines:
   for i in range(0, len(line)-1):
     xmin = min(int(line[i][1]), int(line[i+1][1]))
     xmax = max(int(line[i][1]), int(line[i+1][1])) + 1
-    ymin = min(int(line[i+1][0])-width[0], int(line[i][0])-width[0])
-    ymax = max(int(line[i+1][0])-width[0], int(line[i][0])-width[0]) + 1
+    ymin = min(int(line[i+1][0])-width[0], int(line[i][0])-width[0]) + widthMod
+    ymax = max(int(line[i+1][0])-width[0], int(line[i][0])-width[0]) + 1 + widthMod
     grid[xmin:xmax, ymin:ymax] = '#'
+grid[height[1]+2, :] = '#'
 
 grid = grid.tolist()
 for line in grid:
   print(line)
 startIndex = 500
-trueStart = startIndex-width[0]
+trueStart = startIndex-width[0] + widthMod
 print(trueStart)
 
 falling = True
@@ -55,4 +57,7 @@ count = 0
 while falling:
   count += 1
   falling = fall_sand((0, trueStart))
-print(count-1)
+  if (grid[0][trueStart] == 'o'):
+    break
+
+print(count)
