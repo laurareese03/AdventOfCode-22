@@ -67,15 +67,23 @@ def fall(shape):
       settled = True
     else:
       arenaIndex -= 1
-f = open("demofile2.txt", "a")
-for rock in range(1000000000000):
-  if windIndex != 0 and rock % (windIndex*len(shapes)) == 0:
+
+# think "what would make the pattern repeat"
+# best case scenario -> there's a "bottom of the floor" pattern
+# not sure why this is the case, might check to see what common factors go into:
+# 10091 (length of wind blows)
+# 5 (number of shapes)
+# 7 (length of pipe from side to side)
+# 1730 (how frequently the pattern occurs)
+# the demo example rotated (wind blows)*(shapes)*(pipe length) so who knows
+for rock in range(1870):
+  if '#######' in arena[-1:]:
     print(len(arena)-1, rock)
   fall(shapes[rock%5])
-  f.write(str(len(arena)-1) + '\n')
-f.close()
-
-# for i in range(len(arena)-1, -1, -1):
-#   print(arena[i])
 
 print(len(arena)-1)
+
+# explanation of final calculation:
+# pattern occurs after 1151 drops, in a cycle of 1730
+
+# Final number: 578034681 * 2659 + (2890)
